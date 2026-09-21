@@ -14,7 +14,7 @@ const bricolageGrotesque = Bricolage_Grotesque({
 export const metadata: Metadata = {
   title: "Prabin Singh Thakuri | Full-stack developer in Kathmandu",
   description:
-    "Full-stack developer building React Native apps and Node.js APIs. See Mero Loksewa, live on Google Play, and case studies with architecture and results.",
+    "Full-stack developer in Kathmandu building React and React Native apps with Node.js APIs. See Mero Loksewa and case studies with architecture and results.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

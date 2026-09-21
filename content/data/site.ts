@@ -3,7 +3,7 @@ export const site = {
   role: "Full-stack developer",
   city: "Kathmandu",
   email: "prabinsingh750@gmail.com", // TODO(prabin): consider a dedicated address
-  availability: { open: true, text: "Open to full-stack roles" },
+  availability: { open: true, text: "Open to full-time, part-time or contract work" },
   links: {
     github: "https://github.com/prabin738",
     linkedin: "https://linkedin.com/in/prabin-singh-thakuri",
@@ -12,5 +12,6 @@ export const site = {
     { label: "downloads on Google Play", value: "1,000+" },
     { label: "average rating on Google Play", value: "4.3" },
   ],
-  hiddenClientNames: ["Coca-Cola", "Max Media"],
+  // Max Media is named on the home page now, so it no longer needs hiding.
+  hiddenClientNames: ["Coca-Cola"],
 } as const;

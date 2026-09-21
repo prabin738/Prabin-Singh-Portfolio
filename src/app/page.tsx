@@ -1,12 +1,10 @@
-import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
+import { HeroSection } from "@/components/hero/hero-section";
 
 export default function Home() {
   return (
     <>
-      <Container className="py-16 lg:py-24">
-        <h1 className="text-4xl font-bold text-fg sm:text-5xl">Prabin Singh Thakuri</h1>
-      </Container>
+      <HeroSection />
 
       {/* TODO(prabin): replace with ProjectsSection (docs/06-components.md) */}
       <Section id="projects" heading="Projects">

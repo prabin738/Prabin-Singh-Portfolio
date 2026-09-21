@@ -63,3 +63,23 @@ body {
 :focus-visible {
   @apply outline-2 outline-offset-2 outline-primary-fg;
 }
+
+@keyframes hero-settle {
+  from {
+    transform: translateY(16px) scale(0.98);
+  }
+  to {
+    transform: none;
+  }
+}
+
+.hero-settle {
+  animation: hero-settle 450ms ease-out backwards;
+  animation-delay: calc(var(--i) * 80ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-settle {
+    animation: none;
+  }
+}
