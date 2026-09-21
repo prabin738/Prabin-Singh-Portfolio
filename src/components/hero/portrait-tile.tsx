@@ -1,5 +1,3 @@
-import { existsSync } from "node:fs";
-import path from "node:path";
 import type { CSSProperties } from "react";
 import Image from "next/image";
 import { site } from "@content/data/site";
@@ -7,15 +5,16 @@ import { BentoTile } from "@/components/bento/bento-tile";
 import { Chip } from "@/components/ui/chip";
 import { StatusDot } from "@/components/ui/status-dot";
 import { FrameCar } from "@/components/hero/frame-car";
+import { hasImage } from "@/lib/images";
 
-const PORTRAIT_SRC = "/img/portrait.webp";
+const PORTRAIT_SRC = "/img/portrait/portrait";
 
 type PortraitTileProps = {
   index: number;
 };
 
 export function PortraitTile({ index }: PortraitTileProps) {
-  const hasPortrait = existsSync(path.join(process.cwd(), "public", "img", "portrait.webp"));
+  const hasPortrait = hasImage(PORTRAIT_SRC);
 
   return (
     <BentoTile
@@ -29,7 +28,7 @@ export function PortraitTile({ index }: PortraitTileProps) {
             src={PORTRAIT_SRC}
             alt="Portrait of Prabin Singh Thakuri"
             fill
-            priority
+            preload
             sizes="(min-width: 1024px) 50vw, 100vw"
             className="object-cover object-top"
           />

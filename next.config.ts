@@ -2,9 +2,12 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   output: "export",
-  // TODO(prabin): replace with the custom loader and image script from
-  // docs/03-tech-stack-architecture.md section 6.
-  images: { unoptimized: true },
+  images: {
+    loader: "custom",
+    loaderFile: "./src/lib/image-loader.ts",
+    deviceSizes: [480, 768, 1080, 1440],
+    imageSizes: [64, 128, 256],
+  },
 };
 
 export default nextConfig;

@@ -1,15 +1,13 @@
 import { Section } from "@/components/layout/section";
 import { HeroSection } from "@/components/hero/hero-section";
+import { ProjectsSection } from "@/components/sections/projects-section";
 
 export default function Home() {
   return (
     <>
       <HeroSection />
 
-      {/* TODO(prabin): replace with ProjectsSection (docs/06-components.md) */}
-      <Section id="projects" heading="Projects">
-        <p className="text-muted">Placeholder section for anchor testing.</p>
-      </Section>
+      <ProjectsSection />
 
       {/* TODO(prabin): replace with StackSection (docs/06-components.md) */}
       <Section id="stack" heading="Stack">

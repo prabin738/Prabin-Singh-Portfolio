@@ -1,0 +1,47 @@
+{
+  "/img/portrait/portrait": {
+    "width": 3072,
+    "height": 4096,
+    "widths": [
+      480,
+      768,
+      1080,
+      1440
+    ]
+  },
+  "/img/projects/mero-loksewa/forum": {
+    "width": 610,
+    "height": 1356,
+    "widths": [
+      480
+    ]
+  },
+  "/img/projects/mero-loksewa/homepage": {
+    "width": 610,
+    "height": 1356,
+    "widths": [
+      480
+    ]
+  },
+  "/img/projects/mero-loksewa/homepage-2": {
+    "width": 610,
+    "height": 1356,
+    "widths": [
+      480
+    ]
+  },
+  "/img/projects/mero-loksewa/leaderboard": {
+    "width": 610,
+    "height": 1356,
+    "widths": [
+      480
+    ]
+  },
+  "/img/projects/mero-loksewa/profile": {
+    "width": 610,
+    "height": 1356,
+    "widths": [
+      480
+    ]
+  }
+}
