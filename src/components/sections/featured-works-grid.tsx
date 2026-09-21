@@ -7,10 +7,14 @@ import { ProjectCard } from "@/components/sections/project-card";
 import { cn } from "@/lib/utils";
 
 // Hand-picked per slug rather than inferred, so hierarchy (doc 02, principle 2)
-// stays a deliberate choice: the shipped, numbers-backed product is Large,
-// the other products are Wide, and the API-only case studies are Small.
+// stays a deliberate choice: the shipped, numbers-backed product leads the
+// list, the products are Wide, and the API-only case studies are Small.
+// Mero Loksewa was previously "large" (row-span-2) to stand out further, but
+// that reserves a full extra grid row no card's own content fills, leaving
+// dead space CSS Grid won't let a later card reclaim; ordering carries the
+// emphasis instead.
 const TILE_SIZE: Record<string, "small" | "wide" | "large"> = {
-  "mero-loksewa": "large",
+  "mero-loksewa": "wide",
   "max-media-survey-app": "wide",
   "max-media-admin-dashboard": "wide",
   "invoice-app": "wide",
