@@ -90,10 +90,18 @@ export const projects: Project[] = [
     stack: ["React Native", "SQLite", "Zustand", "MongoDB"],
     cover: {
       src: "/img/projects/max-media-survey-app/cover",
-      alt: "Max Media survey app showing an offline survey form",
+      alt: "Max Media survey app home screen showing sync status and daily survey overview",
     },
-    // TODO(prabin): drop the real build at public/downloads/max-media-survey-app.apk
-    // (same pattern as the CV PDF) so this button serves a real file.
+    gallery: [
+      {
+        src: "/img/projects/max-media-survey-app/max-1",
+        alt: "Max Media survey app interviewer and respondent information form",
+      },
+      {
+        src: "/img/projects/max-media-survey-app/max-2",
+        alt: "Max Media survey app saved reports screen listing draft submissions",
+      },
+    ],
     externalAction: {
       kind: "download",
       label: "Download APK",
