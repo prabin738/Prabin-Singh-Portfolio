@@ -5,6 +5,7 @@ import {
   Blocks,
   Compass,
   Database,
+  Eye,
   Gauge,
   GitBranch,
   Globe,
@@ -88,6 +89,7 @@ const SKILL_ICON: Record<string, { brand: string; size?: number } | { icon: Luci
   "Google Analytics 4": { brand: "googleanalytics" },
   "Search Console": { brand: "googlesearchconsole" },
   "Screaming Frog": { icon: Globe },
+  "Microsoft Clarity": { icon: Eye },
   WooCommerce: { brand: "woocommerce" },
 
   "Problem solving": { icon: Puzzle },

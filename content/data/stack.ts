@@ -69,7 +69,7 @@ export const skills: Skill[] = [
 
   // Other (SEO background, testing, ecommerce). Order is curated for the
   // stack grid's row layout (see SKILL_GROUPS.rowBreaks for "other"): 3
-  // items, then 2, then 2.
+  // items, then 2, then 3.
   { name: "Postman", categories: ["other"] },
   { name: "WooCommerce", categories: ["other"] },
   { name: "Search Console", categories: ["other"] },
@@ -77,6 +77,7 @@ export const skills: Skill[] = [
   { name: "Search Engine Optimization", categories: ["other"] },
   { name: "Google Analytics 4", categories: ["other"] },
   { name: "Screaming Frog", categories: ["other"] },
+  { name: "Microsoft Clarity", categories: ["other"] },
 
   // Soft skills
   { name: "Problem solving", categories: ["soft-skills"] },
