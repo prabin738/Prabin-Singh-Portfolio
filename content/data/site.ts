@@ -7,6 +7,7 @@ export const site = {
   links: {
     github: "https://github.com/prabin738",
     linkedin: "https://linkedin.com/in/prabin-singh-thakuri",
+    whatsapp: "https://wa.me/9779866498278",
   },
   numbers: [
     { label: "downloads on Google Play", value: "1,000+" },
