@@ -3,6 +3,7 @@ import { HeroSection } from "@/components/hero/hero-section";
 import { ProjectsSection } from "@/components/sections/projects-section";
 import { StackSection } from "@/components/sections/stack-section";
 import { ExperienceSection } from "@/components/sections/experience-section";
+import { AboutSection } from "@/components/sections/about-section";
 
 export default function Home() {
   return (
@@ -15,10 +16,7 @@ export default function Home() {
 
       <ExperienceSection />
 
-      {/* TODO(prabin): replace with AboutSection (docs/06-components.md) */}
-      <Section id="about" heading="About">
-        <p className="text-muted">Placeholder section for anchor testing.</p>
-      </Section>
+      <AboutSection />
 
       {/* TODO(prabin): replace with ContactSection (docs/06-components.md) */}
       <Section id="contact" heading="Contact">
