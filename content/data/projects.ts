@@ -119,23 +119,59 @@ export const projects: Project[] = [
     stack: ["React", "Tailwind CSS", "Recharts", "MongoDB"],
     cover: {
       src: "/img/projects/max-media-admin-dashboard/cover",
-      alt: "Max Media admin dashboard showing survey filters and regional charts",
+      alt: "Max Media admin dashboard overview with survey totals, a weekly trend chart and region distribution",
     },
+    gallery: [
+      {
+        src: "/img/projects/max-media-admin-dashboard/max-media-admin-dashboard-login-page",
+        alt: "Max Media admin dashboard login screen",
+      },
+      {
+        src: "/img/projects/max-media-admin-dashboard/max-media-admin-dashboard-reports",
+        alt: "Max Media admin dashboard report screen with province and district filters and a gender breakdown table",
+      },
+      {
+        src: "/img/projects/max-media-admin-dashboard/max-media-admin-dashboard-report-2",
+        alt: "Max Media admin dashboard breakdown comparison chart and SEC report table",
+      },
+    ],
     order: 3,
   },
   {
-    // TODO(prabin): confirm the platform (web or mobile), real stack, status
-    // and one-line result for the invoice app, then replace this entry.
     slug: "invoice-app",
-    title: "Invoice App",
-    summary: "An invoicing tool for creating, sending and tracking client invoices.",
-    status: "in-progress",
-    type: "web",
-    categories: ["frontend", "website"],
-    stack: [],
+    title: "SajiloBill",
+    summary:
+      "Invoicing and accounting app for small businesses: create invoices, track inventory and customer credit, and run full double-entry bookkeeping reports.",
+    status: "live",
+    type: "mobile",
+    categories: ["frontend", "mobile-app"],
+    stack: ["React Native", "TypeScript", "Node.js", "Express", "MongoDB"],
     cover: {
       src: "/img/projects/invoice-app/cover",
-      alt: "Invoice App screen — TODO(prabin): describe once the first screenshot is added",
+      alt: "SajiloBill home screen showing today's sales, credit sales and quick actions",
+    },
+    gallery: [
+      {
+        src: "/img/projects/invoice-app/invoices",
+        alt: "SajiloBill invoices list with paid, partially paid and unpaid filters",
+      },
+      {
+        src: "/img/projects/invoice-app/items",
+        alt: "SajiloBill items screen showing stock levels and margin per item",
+      },
+      {
+        src: "/img/projects/invoice-app/customers",
+        alt: "SajiloBill customers screen showing lifetime sales and credit due",
+      },
+      {
+        src: "/img/projects/invoice-app/reports",
+        alt: "SajiloBill reports screen with sales, profit, expenses and pending invoices",
+      },
+    ],
+    externalAction: {
+      kind: "download",
+      label: "Download APK",
+      href: "/downloads/sajilobill.apk",
     },
     order: 4,
   },
@@ -171,17 +207,18 @@ export const projects: Project[] = [
     order: 6,
   },
   {
-    // TODO(prabin): confirm real stack and status for the invoice app backend.
     slug: "invoice-app-backend",
-    title: "Invoice App API",
-    summary: "The backend API behind the invoice app: creating, storing and sending invoices.",
-    status: "in-progress",
+    title: "SajiloBill API",
+    summary:
+      "The Node.js and Express API behind SajiloBill: invoices, inventory, customer credit and double-entry accounting records, backed by MongoDB.",
+    status: "live",
+    statusLabel: "Live in production",
     type: "backend",
     categories: ["backend"],
-    stack: [],
+    stack: ["Node.js", "Express", "MongoDB"],
     cover: {
       src: "/img/projects/invoice-app-backend/cover",
-      alt: "Invoice App API — TODO(prabin): describe once the first screenshot is added",
+      alt: "SajiloBill API — sample request and response for an invoice creation endpoint",
     },
     pairsWith: "invoice-app",
     order: 7,

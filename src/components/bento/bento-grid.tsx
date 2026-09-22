@@ -11,7 +11,7 @@ export function BentoGrid({ children, className, as: Comp = "div" }: BentoGridPr
   return (
     <Comp
       className={cn(
-        "grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-3.5 lg:grid-cols-4 lg:gap-4 lg:auto-rows-[minmax(180px,auto)]",
+        "grid grid-cols-1 items-start gap-3 sm:grid-cols-2 sm:gap-3.5 lg:grid-cols-4 lg:gap-4 lg:auto-rows-[minmax(180px,auto)]",
         className,
       )}
     >

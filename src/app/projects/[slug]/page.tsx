@@ -1,19 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Download, Globe, Server, Smartphone } from "lucide-react";
 import { getProject, projects, type ProjectStatus } from "@content/data/projects";
 import { Container } from "@/components/layout/container";
 import { Chip } from "@/components/ui/chip";
 import { Button } from "@/components/ui/button";
-import { hasImage } from "@/lib/images";
+import { ProjectGallery } from "@/components/sections/project-gallery";
 import { cn } from "@/lib/utils";
 
 const TYPE_ICON = { mobile: Smartphone, web: Globe, backend: Server } as const;
-// Phone screenshots are portrait; a landscape crop would lose most of the screen.
-const TYPE_ASPECT = { mobile: "aspect-9/16", web: "aspect-4/3 sm:aspect-video", backend: "aspect-4/3 sm:aspect-video" };
-const TYPE_COVER_WIDTH = { mobile: "max-w-xs", web: "max-w-2xl", backend: "max-w-2xl" };
 
 const STATUS_META: Record<ProjectStatus, { label: string; dot: string }> = {
   live: { label: "Live", dot: "bg-live" },
@@ -52,7 +48,6 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   const Icon = TYPE_ICON[project.type];
   const status = STATUS_META[project.status];
   const statusLabel = project.statusLabel ?? status.label;
-  const hasCover = hasImage(project.cover.src);
 
   return (
     <Container as="section" className="py-16 lg:py-24">
@@ -93,45 +88,12 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         </div>
       ) : null}
 
-      <div
-        className={cn(
-          "relative mt-8 w-full overflow-hidden rounded-3xl border border-line bg-raised",
-          TYPE_ASPECT[project.type],
-          TYPE_COVER_WIDTH[project.type],
-        )}
-      >
-        {hasCover ? (
-          <Image
-            src={project.cover.src}
-            alt={project.cover.alt}
-            fill
-            sizes="(min-width: 1024px) 50vw, 100vw"
-            className="object-cover object-top"
-          />
-        ) : (
-          <div className="flex h-full w-full items-center justify-center">
-            <Icon size={40} className="text-subtle" aria-hidden />
-          </div>
-        )}
-      </div>
-
-      {project.gallery && project.gallery.length > 0 ? (
-        <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
-          {project.gallery.map((shot) =>
-            hasImage(shot.src) ? (
-              <div
-                key={shot.src}
-                className={cn(
-                  "relative w-full overflow-hidden rounded-2xl border border-line bg-raised",
-                  TYPE_ASPECT[project.type],
-                )}
-              >
-                <Image src={shot.src} alt={shot.alt} fill sizes="(min-width: 640px) 25vw, 50vw" className="object-cover object-top" />
-              </div>
-            ) : null,
-          )}
-        </div>
-      ) : null}
+      <ProjectGallery
+        type={project.type}
+        cover={project.cover}
+        gallery={project.gallery}
+        emptyCoverFallback={<Icon size={40} className="text-subtle" aria-hidden />}
+      />
 
       <div className="mt-10 rounded-3xl border border-line bg-surface p-6 sm:p-8">
         <p className="text-base text-muted">

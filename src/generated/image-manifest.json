@@ -9,6 +9,116 @@
       1440
     ]
   },
+  "/img/projects/invoice-app/cover": {
+    "width": 1220,
+    "height": 2712,
+    "widths": [
+      480,
+      768,
+      1080
+    ]
+  },
+  "/img/projects/invoice-app/customers": {
+    "width": 1220,
+    "height": 2712,
+    "widths": [
+      480,
+      768,
+      1080
+    ]
+  },
+  "/img/projects/invoice-app/invoices": {
+    "width": 1220,
+    "height": 2712,
+    "widths": [
+      480,
+      768,
+      1080
+    ]
+  },
+  "/img/projects/invoice-app/items": {
+    "width": 1220,
+    "height": 2712,
+    "widths": [
+      480,
+      768,
+      1080
+    ]
+  },
+  "/img/projects/invoice-app/reports": {
+    "width": 1220,
+    "height": 2712,
+    "widths": [
+      480,
+      768,
+      1080
+    ]
+  },
+  "/img/projects/invoice-app/sajilobill-3": {
+    "width": 1220,
+    "height": 2712,
+    "widths": [
+      480,
+      768,
+      1080
+    ]
+  },
+  "/img/projects/invoice-app/sajilobill-4": {
+    "width": 1220,
+    "height": 2712,
+    "widths": [
+      480,
+      768,
+      1080
+    ]
+  },
+  "/img/projects/invoice-app/sajilobill-7": {
+    "width": 1220,
+    "height": 2712,
+    "widths": [
+      480,
+      768,
+      1080
+    ]
+  },
+  "/img/projects/max-media-admin-dashboard/cover": {
+    "width": 1908,
+    "height": 984,
+    "widths": [
+      480,
+      768,
+      1080,
+      1440
+    ]
+  },
+  "/img/projects/max-media-admin-dashboard/max-media-admin-dashboard-login-page": {
+    "width": 876,
+    "height": 871,
+    "widths": [
+      480,
+      768
+    ]
+  },
+  "/img/projects/max-media-admin-dashboard/max-media-admin-dashboard-report-2": {
+    "width": 1903,
+    "height": 982,
+    "widths": [
+      480,
+      768,
+      1080,
+      1440
+    ]
+  },
+  "/img/projects/max-media-admin-dashboard/max-media-admin-dashboard-reports": {
+    "width": 1906,
+    "height": 985,
+    "widths": [
+      480,
+      768,
+      1080,
+      1440
+    ]
+  },
   "/img/projects/max-media-survey-app/cover": {
     "width": 1220,
     "height": 2712,

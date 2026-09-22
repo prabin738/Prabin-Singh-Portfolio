@@ -73,10 +73,6 @@ export function ProjectCard({ project, size }: ProjectCardProps) {
         className={cn(
           "relative w-full shrink-0 overflow-hidden rounded-2xl bg-raised",
           TYPE_ASPECT[project.type],
-          // Landscape covers stretch to fill leftover tile height; a portrait phone
-          // shot would balloon well past its siblings if it did the same, so it
-          // keeps its own natural (bounded) aspect instead.
-          project.type !== "mobile" && "min-h-0 flex-1",
         )}
       >
         {hasCover ? (
@@ -85,7 +81,7 @@ export function ProjectCard({ project, size }: ProjectCardProps) {
             alt={project.cover.alt}
             fill
             sizes={size === "large" ? "(min-width: 1024px) 50vw, 100vw" : "(min-width: 1024px) 25vw, 50vw"}
-            className="object-cover object-top"
+            className="object-contain"
           />
         ) : (
           <div className="flex h-full w-full items-center justify-center">
