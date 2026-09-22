@@ -45,7 +45,7 @@ export function ProjectCard({ project, size }: ProjectCardProps) {
   if (size === "small") {
     return (
       <BentoTile as="article" size={size} interactive className="flex flex-col gap-3">
-        <div className="flex items-start gap-3">
+        <div className="flex items-center gap-3">
           <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-raised text-subtle">
             <Icon size={18} aria-hidden />
           </span>

@@ -139,7 +139,7 @@ export const projects: Project[] = [
   },
   {
     slug: "invoice-app",
-    title: "SajiloBill",
+    title: "SajiloBill: Complete POS, Inventory & Billing System on Mobile",
     summary:
       "Invoicing and accounting app for small businesses: create invoices, track inventory and customer credit, and run full double-entry bookkeeping reports.",
     status: "live",

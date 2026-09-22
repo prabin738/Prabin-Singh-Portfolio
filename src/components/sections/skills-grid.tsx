@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, useEffect, useMemo, useRef, useState } from "react";
+import { Fragment, useMemo, useRef, useState } from "react";
 import {
   Blocks,
   Compass,
@@ -25,6 +25,7 @@ import { SKILL_GROUPS, skills, type SkillCategory } from "@content/data/stack";
 import { BentoGrid } from "@/components/bento/bento-grid";
 import { BentoTile } from "@/components/bento/bento-tile";
 import { BrandIcon } from "@/components/ui/brand-icon";
+import { useAutoSlide } from "@/hooks/use-auto-slide";
 import { cn } from "@/lib/utils";
 
 const CATEGORY_ICON: Record<SkillCategory, LucideIcon> = {
@@ -95,66 +96,6 @@ const SKILL_ICON: Record<string, { brand: string; size?: number } | { icon: Luci
 };
 
 const FILTERS: { label: string; value: "all" | SkillCategory }[] = [{ label: "All", value: "all" }, ...SKILL_GROUPS];
-
-// Mobile-only: gently bounces the filter row back and forth so it reads as
-// scrollable, while a touch/pointer drag pauses it and hands control back to
-// native scrolling; it resumes a couple seconds after the interaction ends.
-const AUTO_SLIDE_PX_PER_FRAME = 0.6;
-const AUTO_SLIDE_RESUME_DELAY_MS = 2000;
-
-function useAutoSlide(ref: React.RefObject<HTMLDivElement | null>) {
-  useEffect(() => {
-    const track = ref.current;
-    if (!track || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    let rafId: number;
-    let direction: 1 | -1 = 1;
-    let paused = false;
-    let resumeTimer: ReturnType<typeof setTimeout> | undefined;
-
-    const step = () => {
-      if (!paused) {
-        const maxScroll = track.scrollWidth - track.clientWidth;
-        if (maxScroll > 0) {
-          let next = track.scrollLeft + direction * AUTO_SLIDE_PX_PER_FRAME;
-          if (next >= maxScroll) {
-            next = maxScroll;
-            direction = -1;
-          } else if (next <= 0) {
-            next = 0;
-            direction = 1;
-          }
-          track.scrollLeft = next;
-        }
-      }
-      rafId = requestAnimationFrame(step);
-    };
-
-    const pause = () => {
-      paused = true;
-      clearTimeout(resumeTimer);
-    };
-    const scheduleResume = () => {
-      clearTimeout(resumeTimer);
-      resumeTimer = setTimeout(() => {
-        paused = false;
-      }, AUTO_SLIDE_RESUME_DELAY_MS);
-    };
-
-    track.addEventListener("pointerdown", pause);
-    track.addEventListener("pointerup", scheduleResume);
-    track.addEventListener("pointercancel", scheduleResume);
-    rafId = requestAnimationFrame(step);
-
-    return () => {
-      cancelAnimationFrame(rafId);
-      clearTimeout(resumeTimer);
-      track.removeEventListener("pointerdown", pause);
-      track.removeEventListener("pointerup", scheduleResume);
-      track.removeEventListener("pointercancel", scheduleResume);
-    };
-  }, [ref]);
-}
 
 function SkillIcon({ name }: { name: string }) {
   const entry = SKILL_ICON[name];
