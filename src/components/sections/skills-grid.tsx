@@ -1,9 +1,8 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { Fragment, useEffect, useMemo, useRef, useState } from "react";
 import {
   Blocks,
-  Bot,
   Compass,
   Database,
   Gauge,
@@ -15,6 +14,7 @@ import {
   Search,
   Server,
   Sparkles,
+  Terminal,
   Users,
   Wand2,
   Webhook,
@@ -39,8 +39,11 @@ const CATEGORY_ICON: Record<SkillCategory, LucideIcon> = {
 };
 
 // Keyed by skill name. A brand slug renders through simple-icons (BrandIcon);
-// icon is a Lucide fallback for skills with no brand mark to draw on.
-const SKILL_ICON: Record<string, { brand: string } | { icon: LucideIcon }> = {
+// icon is a Lucide fallback for skills with no brand mark to draw on. `size`
+// overrides the default 18px for marks that otherwise read heavier/lighter
+// than their neighbors (dense glyphs like Gemini's sparkle or Postman's mark
+// visually outweigh thinner logos at the same box size).
+const SKILL_ICON: Record<string, { brand: string; size?: number } | { icon: LucideIcon; size?: number }> = {
   React: { brand: "react" },
   "React Native": { brand: "react" },
   Expo: { brand: "expo" },
@@ -75,10 +78,10 @@ const SKILL_ICON: Record<string, { brand: string } | { icon: LucideIcon }> = {
   "Claude Code": { brand: "claude" },
   Cursor: { brand: "cursor" },
   "GitHub Copilot": { brand: "githubcopilot" },
-  "Gemini Code Assist": { brand: "googlegemini" },
-  Codex: { icon: Bot },
+  "Gemini Code Assist": { brand: "googlegemini", size: 15 },
+  Codex: { icon: Terminal },
 
-  Postman: { brand: "postman" },
+  Postman: { brand: "postman", size: 15 },
   "Google Play Console": { brand: "googleplay" },
   "Search Engine Optimization": { icon: Search },
   "Google Analytics 4": { brand: "googleanalytics" },
@@ -93,20 +96,83 @@ const SKILL_ICON: Record<string, { brand: string } | { icon: LucideIcon }> = {
 
 const FILTERS: { label: string; value: "all" | SkillCategory }[] = [{ label: "All", value: "all" }, ...SKILL_GROUPS];
 
+// Mobile-only: gently bounces the filter row back and forth so it reads as
+// scrollable, while a touch/pointer drag pauses it and hands control back to
+// native scrolling; it resumes a couple seconds after the interaction ends.
+const AUTO_SLIDE_PX_PER_FRAME = 0.6;
+const AUTO_SLIDE_RESUME_DELAY_MS = 2000;
+
+function useAutoSlide(ref: React.RefObject<HTMLDivElement | null>) {
+  useEffect(() => {
+    const track = ref.current;
+    if (!track || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    let rafId: number;
+    let direction: 1 | -1 = 1;
+    let paused = false;
+    let resumeTimer: ReturnType<typeof setTimeout> | undefined;
+
+    const step = () => {
+      if (!paused) {
+        const maxScroll = track.scrollWidth - track.clientWidth;
+        if (maxScroll > 0) {
+          let next = track.scrollLeft + direction * AUTO_SLIDE_PX_PER_FRAME;
+          if (next >= maxScroll) {
+            next = maxScroll;
+            direction = -1;
+          } else if (next <= 0) {
+            next = 0;
+            direction = 1;
+          }
+          track.scrollLeft = next;
+        }
+      }
+      rafId = requestAnimationFrame(step);
+    };
+
+    const pause = () => {
+      paused = true;
+      clearTimeout(resumeTimer);
+    };
+    const scheduleResume = () => {
+      clearTimeout(resumeTimer);
+      resumeTimer = setTimeout(() => {
+        paused = false;
+      }, AUTO_SLIDE_RESUME_DELAY_MS);
+    };
+
+    track.addEventListener("pointerdown", pause);
+    track.addEventListener("pointerup", scheduleResume);
+    track.addEventListener("pointercancel", scheduleResume);
+    rafId = requestAnimationFrame(step);
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      clearTimeout(resumeTimer);
+      track.removeEventListener("pointerdown", pause);
+      track.removeEventListener("pointerup", scheduleResume);
+      track.removeEventListener("pointercancel", scheduleResume);
+    };
+  }, [ref]);
+}
+
 function SkillIcon({ name }: { name: string }) {
   const entry = SKILL_ICON[name];
   if (!entry) return null;
 
+  const size = entry.size ?? 18;
   if ("brand" in entry) {
-    return <BrandIcon slug={entry.brand} size={18} />;
+    return <BrandIcon slug={entry.brand} size={size} />;
   }
 
   const Icon = entry.icon;
-  return <Icon size={18} aria-hidden />;
+  return <Icon size={size} aria-hidden />;
 }
 
 export function SkillsGrid() {
   const [filter, setFilter] = useState<"all" | SkillCategory>("all");
+  const filterTrackRef = useRef<HTMLDivElement>(null);
+  useAutoSlide(filterTrackRef);
 
   const visibleGroups = useMemo(
     () => (filter === "all" ? SKILL_GROUPS : SKILL_GROUPS.filter((group) => group.value === filter)),
@@ -115,7 +181,12 @@ export function SkillsGrid() {
 
   return (
     <div className="flex flex-col gap-8">
-      <div role="group" aria-label="Filter skills by category" className="flex flex-wrap gap-2">
+      <div
+        ref={filterTrackRef}
+        role="group"
+        aria-label="Filter skills by category"
+        className="flex flex-nowrap gap-2 overflow-x-auto scrollbar-none sm:flex-wrap sm:overflow-visible"
+      >
         {FILTERS.map((item) => {
           const active = filter === item.value;
           return (
@@ -125,7 +196,7 @@ export function SkillsGrid() {
               aria-pressed={active}
               onClick={() => setFilter(item.value)}
               className={cn(
-                "inline-flex h-11 cursor-pointer items-center justify-center rounded-full px-5 text-sm font-medium transition-colors",
+                "inline-flex h-11 shrink-0 cursor-pointer items-center justify-center whitespace-nowrap rounded-full px-5 text-sm font-medium transition-colors",
                 active
                   ? "bg-primary text-white"
                   : "border border-line-strong text-muted hover:bg-raised hover:text-fg",
@@ -151,17 +222,17 @@ export function SkillsGrid() {
                 <h3 className="text-lg font-semibold text-fg">{group.label}</h3>
               </div>
 
-              <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
-                {items.map((skill) => (
-                  <div
-                    key={skill.name}
-                    className="flex items-start gap-2 rounded-xl border border-line bg-raised px-3 py-2.5 text-sm text-muted"
-                  >
-                    <span className="mt-0.5 shrink-0 text-subtle">
-                      <SkillIcon name={skill.name} />
-                    </span>
-                    <span>{skill.name}</span>
-                  </div>
+              <div className="flex flex-wrap gap-2">
+                {items.map((skill, index) => (
+                  <Fragment key={skill.name}>
+                    <div className="inline-flex items-center gap-2 whitespace-nowrap rounded-xl border border-line bg-raised px-3 py-2.5 text-sm text-muted transition-all duration-150 hover:-translate-y-0.5 hover:border-primary-fg hover:bg-primary/5">
+                      <span className="shrink-0 text-subtle">
+                        <SkillIcon name={skill.name} />
+                      </span>
+                      <span>{skill.name}</span>
+                    </div>
+                    {group.rowBreaks?.includes(index + 1) && <span className="basis-full" aria-hidden />}
+                  </Fragment>
                 ))}
               </div>
             </BentoTile>

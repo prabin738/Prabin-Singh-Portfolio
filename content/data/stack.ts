@@ -67,14 +67,16 @@ export const skills: Skill[] = [
   { name: "Gemini Code Assist", categories: ["vibe-coding-tools"] },
   { name: "Codex", categories: ["vibe-coding-tools"] },
 
-  // Other (SEO background, testing, ecommerce)
+  // Other (SEO background, testing, ecommerce). Order is curated for the
+  // stack grid's row layout (see SKILL_GROUPS.rowBreaks for "other"): 3
+  // items, then 2, then 2.
   { name: "Postman", categories: ["other"] },
+  { name: "WooCommerce", categories: ["other"] },
+  { name: "Search Console", categories: ["other"] },
   { name: "Google Play Console", categories: ["other"] },
   { name: "Search Engine Optimization", categories: ["other"] },
   { name: "Google Analytics 4", categories: ["other"] },
-  { name: "Search Console", categories: ["other"] },
   { name: "Screaming Frog", categories: ["other"] },
-  { name: "WooCommerce", categories: ["other"] },
 
   // Soft skills
   { name: "Problem solving", categories: ["soft-skills"] },
@@ -82,13 +84,18 @@ export const skills: Skill[] = [
   { name: "Client management", categories: ["soft-skills"] },
 ];
 
-export const SKILL_GROUPS: { label: string; value: SkillCategory }[] = [
+export const SKILL_GROUPS: {
+  label: string;
+  value: SkillCategory;
+  /** Forces a line break after these 1-indexed item positions, for a curated row layout. */
+  rowBreaks?: number[];
+}[] = [
   { label: "Frontend", value: "frontend" },
   { label: "Design", value: "design" },
   { label: "Backend", value: "backend" },
   { label: "Database", value: "database" },
   { label: "Version control & cloud deployment", value: "cloud-deployment" },
   { label: "Vibe coding tools", value: "vibe-coding-tools" },
-  { label: "Other", value: "other" },
+  { label: "Other", value: "other", rowBreaks: [3, 5] },
   { label: "Soft skills", value: "soft-skills" },
 ];
