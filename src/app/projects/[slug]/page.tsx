@@ -2,7 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Download, Globe, Server, Smartphone } from "lucide-react";
-import { getProject, projects, type ProjectStatus } from "@content/data/projects";
+import { getProject, projects, type Project, type ProjectStatus } from "@content/data/projects";
+import { site, SITE_URL } from "@content/data/site";
+import { hasImage } from "@/lib/images";
+import { absoluteUrl } from "@/lib/seo";
+import { JsonLd } from "@/lib/json-ld";
 import { Container } from "@/components/layout/container";
 import { Chip } from "@/components/ui/chip";
 import { Button } from "@/components/ui/button";
@@ -10,6 +14,52 @@ import { ProjectGallery } from "@/components/sections/project-gallery";
 import { cn } from "@/lib/utils";
 
 const TYPE_ICON = { mobile: Smartphone, web: Globe, backend: Server } as const;
+
+// schema.org applicationCategory has no dedicated "exam prep" value; the rest
+// default to BusinessApplication below.
+const APPLICATION_CATEGORY: Record<string, string> = {
+  "mero-loksewa": "EducationalApplication",
+};
+
+function buildProjectJsonLd(project: Project) {
+  const url = absoluteUrl(`/projects/${project.slug}`);
+  const image = hasImage(project.cover.src) ? absoluteUrl(`${project.cover.src}-1080.webp`) : undefined;
+  const author = { "@id": `${SITE_URL}/#person` };
+
+  // Mirrors the visible breadcrumb nav below — don't mark up a path that isn't on the page.
+  const breadcrumb = {
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+      { "@type": "ListItem", position: 2, name: "Featured works", item: absoluteUrl("/#projects") },
+      { "@type": "ListItem", position: 3, name: project.title },
+    ],
+  };
+
+  const entity =
+    project.type === "backend"
+      ? {
+          "@type": "CreativeWork",
+          name: project.title,
+          description: project.summary,
+          url,
+          ...(image ? { image } : {}),
+          author,
+        }
+      : {
+          "@type": project.type === "mobile" ? "MobileApplication" : "SoftwareApplication",
+          name: project.title,
+          description: project.summary,
+          url,
+          ...(image ? { image } : {}),
+          operatingSystem: project.type === "mobile" ? "Android" : "Web",
+          applicationCategory: APPLICATION_CATEGORY[project.slug] ?? "BusinessApplication",
+          offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+          author,
+        };
+
+  return { "@context": "https://schema.org", "@graph": [breadcrumb, entity] };
+}
 
 const STATUS_META: Record<ProjectStatus, { label: string; dot: string }> = {
   live: { label: "Live", dot: "bg-live" },
@@ -34,9 +84,26 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
   const project = getProject(slug);
   if (!project) return {};
 
+  const title = `${project.seoTitle ?? project.title} case study`;
+  const path = `/projects/${project.slug}`;
+
   return {
-    title: `${project.title} case study | Prabin Singh Thakuri`,
+    title,
     description: project.summary,
+    alternates: { canonical: path },
+    openGraph: {
+      type: "website",
+      locale: "en_US",
+      url: path,
+      siteName: site.name,
+      title,
+      description: project.summary,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description: project.summary,
+    },
   };
 }
 
@@ -48,9 +115,12 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   const Icon = TYPE_ICON[project.type];
   const status = STATUS_META[project.status];
   const statusLabel = project.statusLabel ?? status.label;
+  const jsonLd = buildProjectJsonLd(project);
 
   return (
     <Container as="section" className="py-16 lg:py-24">
+      <JsonLd data={jsonLd} />
+
       <nav aria-label="Breadcrumb" className="text-sm text-muted">
         <ol className="flex flex-wrap items-center gap-2">
           <li>

@@ -20,6 +20,8 @@ export type ExternalAction = {
 export type Project = {
   slug: string;
   title: string;
+  /** Short form of `title` for the <title> tag when `title` is too long to fit the "{title} case study | Prabin Singh Thakuri" pattern under ~60 characters. */
+  seoTitle?: string;
   /** One line that states the result. Sentence case, no invented numbers. */
   summary: string;
   status: ProjectStatus;
@@ -140,6 +142,7 @@ export const projects: Project[] = [
   {
     slug: "invoice-app",
     title: "SajiloBill: Complete POS, Inventory & Billing System on Mobile",
+    seoTitle: "SajiloBill invoicing app",
     summary:
       "Invoicing and accounting app for small businesses: create invoices, track inventory and customer credit, and run full double-entry bookkeeping reports.",
     status: "live",
