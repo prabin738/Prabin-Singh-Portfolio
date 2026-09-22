@@ -20,7 +20,7 @@ export function PortraitTile({ index }: PortraitTileProps) {
     <BentoTile
       size="large"
       style={{ "--i": index } as CSSProperties}
-      className="hero-settle min-h-[22rem] p-5 sm:min-h-[26rem] sm:p-5 lg:min-h-[32rem]"
+      className="hero-settle h-88 p-5 sm:h-104 sm:p-5 lg:h-128"
     >
       <div className="relative h-full w-full overflow-hidden rounded-3xl bg-raised">
         {hasPortrait ? (
