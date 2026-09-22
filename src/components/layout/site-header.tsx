@@ -38,7 +38,12 @@ export function SiteHeader() {
 
         <div className="flex items-center gap-3">
           <ThemeToggle />
-          <Button href={CV_HREF} variant="primary" className="hidden lg:inline-flex">
+          <Button
+            href={CV_HREF}
+            download
+            variant="primary"
+            className="hidden lg:inline-flex"
+          >
             Download CV
           </Button>
           <MobileMenu navItems={NAV_ITEMS} cvHref={CV_HREF} />

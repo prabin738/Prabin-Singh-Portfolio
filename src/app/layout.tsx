@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/layout/theme-provider";
 import { SkipLink } from "@/components/layout/skip-link";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
+import { BackToTop } from "@/components/layout/back-to-top";
 
 const bricolageGrotesque = Bricolage_Grotesque({
   subsets: ["latin"],
@@ -20,12 +21,13 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={bricolageGrotesque.className}>
+      <body className={bricolageGrotesque.className} suppressHydrationWarning>
         <ThemeProvider>
           <SkipLink />
           <SiteHeader />
           <main id="main">{children}</main>
           <SiteFooter />
+          <BackToTop />
         </ThemeProvider>
       </body>
     </html>

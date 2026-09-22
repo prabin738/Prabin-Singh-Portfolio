@@ -52,6 +52,7 @@
 
 html {
   scroll-padding-top: 5rem;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -79,6 +80,10 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   .hero-settle {
     animation: none;
   }

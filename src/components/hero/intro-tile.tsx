@@ -14,7 +14,7 @@ export function IntroTile({ index }: IntroTileProps) {
     <BentoTile
       size="large"
       style={{ "--i": index } as CSSProperties}
-      className="hero-settle flex flex-col gap-6 p-6 sm:p-8 lg:min-h-[32rem] lg:justify-center lg:p-10"
+      className="hero-settle flex flex-col gap-6 p-6 sm:p-8 lg:min-h-128 lg:justify-center lg:p-10"
     >
       <div className="flex flex-col gap-3">
         <h1 className="text-[44px] font-bold leading-none tracking-[-0.03em] text-fg lg:text-[72px]">

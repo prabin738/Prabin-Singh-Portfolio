@@ -61,7 +61,13 @@ export function MobileMenu({ navItems, cvHref }: MobileMenuProps) {
           ))}
         </nav>
 
-        <Button href={cvHref} variant="primary" onClick={closeMenu} className="mt-8 w-full">
+        <Button
+          href={cvHref}
+          download
+          variant="primary"
+          onClick={closeMenu}
+          className="mt-8 w-full"
+        >
           Download CV
         </Button>
       </dialog>
