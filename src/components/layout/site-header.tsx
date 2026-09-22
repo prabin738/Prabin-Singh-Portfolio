@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 
 const NAV_ITEMS = [
   { href: "/#projects", label: "Featured works" },
-  { href: "/#stack", label: "Stack" },
+  { href: "/#stack", label: "Skills and Stacks" },
   { href: "/#experience", label: "Experience" },
   // Blog is left out of the nav until the launch rule in docs/04-content-copy.md (at least 2 posts) is met.
   { href: "/#about", label: "About" },
