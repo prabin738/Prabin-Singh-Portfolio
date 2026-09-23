@@ -11,6 +11,7 @@ import { Container } from "@/components/layout/container";
 import { Chip } from "@/components/ui/chip";
 import { Button } from "@/components/ui/button";
 import { ProjectGallery } from "@/components/sections/project-gallery";
+import { MeroLoksewaCaseStudy } from "@/components/case-studies/mero-loksewa-case-study";
 import { cn } from "@/lib/utils";
 
 const TYPE_ICON = { mobile: Smartphone, web: Globe, backend: Server } as const;
@@ -165,29 +166,34 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         emptyCoverFallback={<Icon size={40} className="text-subtle" aria-hidden />}
       />
 
-      <div className="mt-10 rounded-3xl border border-line bg-surface p-6 sm:p-8">
-        <p className="text-base text-muted">
-          The full case study — architecture, API overview and results — is on its way.
-        </p>
-        <div className="mt-4 flex flex-wrap gap-2">
-          {project.externalAction ? (
-            <Button
-              href={project.externalAction.href}
-              download={project.externalAction.kind === "download" ? true : undefined}
-              variant="primary"
-            >
-              {project.externalAction.kind === "download" ? (
-                <Download size={16} aria-hidden />
-              ) : (
-                <Smartphone size={16} aria-hidden />
-              )}
-              {project.externalAction.label}
-            </Button>
-          ) : null}
-          <Button href="/#projects" variant="secondary">
-            Back to Featured works
-          </Button>
+      {project.slug === "mero-loksewa" ? (
+        <MeroLoksewaCaseStudy />
+      ) : (
+        <div className="mt-10 rounded-3xl border border-line bg-surface p-6 sm:p-8">
+          <p className="text-base text-muted">
+            The full case study — architecture, API overview and results — is on its way.
+          </p>
         </div>
+      )}
+
+      <div className="mt-10 flex flex-wrap gap-2">
+        {project.externalAction ? (
+          <Button
+            href={project.externalAction.href}
+            download={project.externalAction.kind === "download" ? true : undefined}
+            variant="primary"
+          >
+            {project.externalAction.kind === "download" ? (
+              <Download size={16} aria-hidden />
+            ) : (
+              <Smartphone size={16} aria-hidden />
+            )}
+            {project.externalAction.label}
+          </Button>
+        ) : null}
+        <Button href="/#projects" variant="secondary">
+          Back to Featured works
+        </Button>
       </div>
     </Container>
   );
