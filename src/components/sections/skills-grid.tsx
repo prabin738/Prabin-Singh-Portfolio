@@ -9,6 +9,7 @@ import {
   Gauge,
   GitBranch,
   Globe,
+  Hash,
   Network,
   Palette,
   Puzzle,
@@ -91,6 +92,12 @@ const SKILL_ICON: Record<string, { brand: string; size?: number } | { icon: Luci
   "Screaming Frog": { icon: Globe },
   "Microsoft Clarity": { icon: Eye },
   WooCommerce: { brand: "woocommerce" },
+  Jira: { brand: "jira" },
+  Asana: { brand: "asana" },
+  Trello: { brand: "trello" },
+  // simple-icons dropped Slack's mark (trademark takedown, same as LinkedIn
+  // above); Hash stands in since Slack's own glyph is a stylized "#".
+  Slack: { icon: Hash },
 
   "Problem solving": { icon: Puzzle },
   "Self-directed / ownership": { icon: Compass },

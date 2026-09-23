@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque } from "next/font/google";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
 import { site, SITE_URL } from "@content/data/site";
 import { isProductionDeploy } from "@/lib/seo";
@@ -80,6 +81,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <BackToTop />
         </ThemeProvider>
       </body>
+      {isProductionDeploy && process.env.NEXT_PUBLIC_GA_ID && (
+        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+      )}
     </html>
   );
 }

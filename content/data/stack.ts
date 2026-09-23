@@ -67,9 +67,9 @@ export const skills: Skill[] = [
   { name: "Gemini Code Assist", categories: ["vibe-coding-tools"] },
   { name: "Codex", categories: ["vibe-coding-tools"] },
 
-  // Other (SEO background, testing, ecommerce). Order is curated for the
-  // stack grid's row layout (see SKILL_GROUPS.rowBreaks for "other"): 3
-  // items, then 2, then 3.
+  // Other (SEO background, testing, ecommerce, PM/collab tools). Order is
+  // curated for the stack grid's row layout (see SKILL_GROUPS.rowBreaks for
+  // "other"): 3 items, then 2, then the rest wraps naturally.
   { name: "Postman", categories: ["other"] },
   { name: "WooCommerce", categories: ["other"] },
   { name: "Search Console", categories: ["other"] },
@@ -78,6 +78,10 @@ export const skills: Skill[] = [
   { name: "Google Analytics 4", categories: ["other"] },
   { name: "Screaming Frog", categories: ["other"] },
   { name: "Microsoft Clarity", categories: ["other"] },
+  { name: "Jira", categories: ["other"] },
+  { name: "Asana", categories: ["other"] },
+  { name: "Trello", categories: ["other"] },
+  { name: "Slack", categories: ["other"] },
 
   // Soft skills
   { name: "Problem solving", categories: ["soft-skills"] },
