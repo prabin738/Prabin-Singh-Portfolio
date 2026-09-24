@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import Link from "next/link";
+import { NavLink } from "@/components/layout/nav-link";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -50,14 +50,14 @@ export function MobileMenu({ navItems, cvHref }: MobileMenuProps) {
 
         <nav aria-label="Mobile" className="mt-8 flex flex-col gap-1">
           {navItems.map((item) => (
-            <Link
+            <NavLink
               key={item.href}
               href={item.href}
               onClick={closeMenu}
               className="rounded-xl px-3 py-3 text-lg font-medium text-fg hover:bg-raised"
             >
               {item.label}
-            </Link>
+            </NavLink>
           ))}
         </nav>
 

@@ -10,17 +10,27 @@
 // `results.pending` list below is everything the source doc still marks
 // `FILL IN` — real numbers Prabin hasn't filled in yet, not invented ones.
 
-export type FactStripItem = { label: string; value: string };
+import type {
+  CaseStudyLinks,
+  CaseStudyProblem,
+  CaseStudyResults,
+  CaseStudySolution,
+  CaseStudyUsers,
+  ChallengeRow,
+  FlowNode,
+  Highlight,
+  LabeledValue,
+  SecurityGroup,
+  StackGroup,
+} from "./types";
 
-export const factStrip: FactStripItem[] = [
+export const factStrip: LabeledValue[] = [
   { label: "Role", value: "Solo full-stack developer — product, mobile, backend, DevOps, content pipeline" },
   { label: "Platform", value: "Android on Google Play (the Expo codebase can also target iOS)" },
   { label: "Timeline", value: "March 2026 to present · v1.4.0 · ~190 commits" },
 ];
 
-export type AtAGlanceItem = { label: string; value: string };
-
-export const atAGlance: AtAGlanceItem[] = [
+export const atAGlance: LabeledValue[] = [
   {
     label: "Exam tracks",
     value:
@@ -38,7 +48,7 @@ export const tldr: string[] = [
   "Content is written once and served in Nepali and English through a reusable Mongoose plugin that translates on save — and when Express 5 quietly broke the usual security middleware, I wrote a replacement instead of downgrading.",
 ];
 
-export const problem = {
+export const problem: CaseStudyProblem = {
   intro:
     "Every year, hundreds of thousands of candidates in Nepal sit the Loksewa Aayog (Public Service Commission) exams. Preparation today is fragmented and poorly suited to how candidates actually live:",
   points: [
@@ -51,13 +61,13 @@ export const problem = {
   goal: "One app that covers every major exam track, works offline on cheap phones, speaks both languages, and keeps learners coming back every day.",
 };
 
-export const users = {
+export const users: CaseStudyUsers = {
   primary: "Loksewa candidates aged 18–35 preparing for a specific track (for example a Nasu or Kharidar aspirant in a district town).",
   secondary: "Candidates preparing for related exams (NRB banking, teacher licensing, pharmacy, engineering).",
   constraints: "Budget Android devices, intermittent 3G/4G, Nepali-first reading, study in short sessions.",
 };
 
-export const solution = {
+export const solution: CaseStudySolution = {
   intro: "A React Native (Expo) app backed by a Node/Express + MongoDB API. The app has three main parts:",
   parts: [
     {
@@ -86,8 +96,6 @@ export const solution = {
   ],
 };
 
-export type StackGroup = { label: string; items: string[] };
-
 export const stackGroups: StackGroup[] = [
   { label: "Mobile & navigation", items: ["React Native 0.81 (New Architecture)", "React 19", "Expo SDK 54 (dev client, EAS Build)", "Hermes", "React Navigation v7"] },
   { label: "State, data & on-device storage", items: ["React Context", "useSmartFetch", "useModuleData", "expo-file-system", "AsyncStorage", "expo-secure-store"] },
@@ -98,8 +106,6 @@ export const stackGroups: StackGroup[] = [
   { label: "Security", items: ["helmet", "express-rate-limit", "custom NoSQL-injection/XSS sanitiser", "CORS allow-list"] },
   { label: "Hosting", items: ["Render (API)", "Cloudflare R2 (content)", "Google Play (app)"] },
 ];
-
-export type FlowNode = { title: string; subtitle?: string; items: string[] };
 
 export const architecture = {
   app: {
@@ -146,8 +152,6 @@ export const architecture = {
   flow: "Request flow for a study screen: the screen asks useModuleData for a module. The hook reads the local file straight away if one exists. It then checks the small R2 manifest and downloads only if that module's version changed. If R2 is unreachable and nothing is cached locally, it falls back to the Express endpoint. The screen shows content at every step and never blocks on the network.",
 };
 
-export type Highlight = { title: string; summary: string; deepDive: string[] };
-
 export const highlights: Highlight[] = [
   {
     title: "Offline-first content pipeline",
@@ -191,7 +195,8 @@ export const alsoInTheCodebase: string[] = [
   "The API runs on Render's free tier, which sleeps when idle. The app pings a lightweight /api/system/popup endpoint at boot to wake it while the user sees cached content.",
 ];
 
-export type SecurityGroup = { title: string; items: string[] };
+export const securityIntro =
+  "The custom NoSQL-injection/XSS sanitiser is covered in the system design highlights above. The rest of the hardening:";
 
 export const securityGroups: SecurityGroup[] = [
   {
@@ -226,8 +231,6 @@ export const securityGroups: SecurityGroup[] = [
   },
 ];
 
-export type ChallengeRow = { challenge: string; decision: string; tradeoff: string };
-
 export const challenges: ChallengeRow[] = [
   { challenge: "Unreliable networks", decision: "Cache-first and file-based modules, with seed data as a last resort", tradeoff: "Content can be up to one sync behind" },
   { challenge: "AsyncStorage bloat", decision: "Moved large payloads to file storage plus the R2 manifest", tradeoff: "Needs a separate publish step after editing content" },
@@ -238,7 +241,7 @@ export const challenges: ChallengeRow[] = [
   { challenge: "~120 screens in one stack", decision: "Shared quiz/study/notes components reused across every track", tradeoff: "Adding a track still means registering screens by hand" },
 ];
 
-export const results = {
+export const results: CaseStudyResults = {
   stats: [
     { label: "Downloads on Google Play", value: "1,000+" },
     { label: "Average Play Store rating", value: "4.3" },
@@ -268,7 +271,7 @@ export const whatsNext: string[] = [
   "iOS release.",
 ];
 
-export const caseStudyLinks = {
+export const caseStudyLinks: CaseStudyLinks = {
   // Set to a URL to link out; leave null to show the "private repository" note instead.
-  github: null as string | null,
+  github: null,
 };

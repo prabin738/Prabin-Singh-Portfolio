@@ -10,13 +10,12 @@ import {
   problem,
   results,
   securityGroups,
-  securityIntro,
   solution,
   stackGroups,
   tldr,
   users,
   whatsNext,
-} from "@content/data/case-studies/mero-loksewa";
+} from "@content/data/case-studies/max-media-admin-dashboard";
 import { CaseStudyToc } from "@/components/case-studies/case-study-toc";
 import { DiagramFrame, FlowConnector, FlowNode } from "@/components/case-studies/case-study-primitives";
 import {
@@ -52,23 +51,18 @@ const SECTIONS = [
 function ArchitectureDiagram() {
   return (
     <DiagramFrame>
-      <FlowNode node={architecture.app} />
-      <FlowConnector labels={architecture.toBackend} />
-      <div className="grid gap-3 sm:grid-cols-2">
-        <FlowNode node={architecture.api} />
-        <FlowNode node={architecture.r2} />
-      </div>
-      <p className="mt-3 text-center text-xs leading-relaxed text-subtle">{architecture.publishNote}</p>
-      <FlowConnector labels={architecture.toData} />
-      <div className="grid gap-3 sm:grid-cols-2">
-        <FlowNode node={architecture.db} />
-        <FlowNode node={architecture.fcm} />
-      </div>
+      <FlowNode node={architecture.fieldApp} />
+      <FlowConnector labels={architecture.toApi} />
+      <FlowNode node={architecture.api} />
+      <FlowConnector labels={architecture.toConsole} />
+      <FlowNode node={architecture.console} />
+      <p className="mt-3 text-center text-xs leading-relaxed text-subtle">{architecture.consoleNote}</p>
+      <p className="mt-4 text-center text-xs leading-relaxed text-subtle">{architecture.publishNote}</p>
     </DiagramFrame>
   );
 }
 
-export function MeroLoksewaCaseStudy() {
+export function MaxMediaAdminDashboardCaseStudy() {
   return (
     <div className="mt-4">
       <CaseStudyToc sections={SECTIONS} />
@@ -81,7 +75,7 @@ export function MeroLoksewaCaseStudy() {
         <ArchitectureDiagram />
       </ArchitectureSection>
       <HighlightsSection highlights={highlights} also={alsoInTheCodebase} />
-      <SecuritySection groups={securityGroups} intro={securityIntro} />
+      <SecuritySection groups={securityGroups} />
       <ChallengesSection rows={challenges} />
       <ResultsSection results={results} />
       <LearningsSection items={learnings} />

@@ -1,3 +1,4 @@
+import type { ComponentType } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -12,6 +13,8 @@ import { Chip } from "@/components/ui/chip";
 import { Button } from "@/components/ui/button";
 import { ProjectGallery } from "@/components/sections/project-gallery";
 import { MeroLoksewaCaseStudy } from "@/components/case-studies/mero-loksewa-case-study";
+import { MaxMediaSurveyAppCaseStudy } from "@/components/case-studies/max-media-survey-app-case-study";
+import { MaxMediaAdminDashboardCaseStudy } from "@/components/case-studies/max-media-admin-dashboard-case-study";
 import { cn } from "@/lib/utils";
 
 const TYPE_ICON = { mobile: Smartphone, web: Globe, backend: Server } as const;
@@ -61,6 +64,13 @@ function buildProjectJsonLd(project: Project) {
 
   return { "@context": "https://schema.org", "@graph": [breadcrumb, entity] };
 }
+
+// Slugs with a written case study; every other project shows the "on its way" note.
+const CASE_STUDIES: Record<string, ComponentType> = {
+  "mero-loksewa": MeroLoksewaCaseStudy,
+  "max-media-survey-app": MaxMediaSurveyAppCaseStudy,
+  "max-media-admin-dashboard": MaxMediaAdminDashboardCaseStudy,
+};
 
 const STATUS_META: Record<ProjectStatus, { label: string; dot: string }> = {
   live: { label: "Live", dot: "bg-live" },
@@ -117,6 +127,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   const status = STATUS_META[project.status];
   const statusLabel = project.statusLabel ?? status.label;
   const jsonLd = buildProjectJsonLd(project);
+  const CaseStudy = CASE_STUDIES[project.slug];
 
   return (
     <Container as="section" className="py-16 lg:py-24">
@@ -166,8 +177,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         emptyCoverFallback={<Icon size={40} className="text-subtle" aria-hidden />}
       />
 
-      {project.slug === "mero-loksewa" ? (
-        <MeroLoksewaCaseStudy />
+      {CaseStudy ? (
+        <CaseStudy />
       ) : (
         <div className="mt-10 rounded-3xl border border-line bg-surface p-6 sm:p-8">
           <p className="text-base text-muted">

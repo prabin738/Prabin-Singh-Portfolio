@@ -3,6 +3,7 @@ import { site } from "@content/data/site";
 import { Container } from "@/components/layout/container";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { MobileMenu } from "@/components/layout/mobile-menu";
+import { NavLink } from "@/components/layout/nav-link";
 import { Button } from "@/components/ui/button";
 
 const NAV_ITEMS = [
@@ -26,13 +27,13 @@ export function SiteHeader() {
 
         <nav aria-label="Primary" className="hidden lg:flex lg:items-center lg:gap-8">
           {NAV_ITEMS.map((item) => (
-            <Link
+            <NavLink
               key={item.href}
               href={item.href}
               className="text-sm font-medium text-muted hover:text-fg"
             >
               {item.label}
-            </Link>
+            </NavLink>
           ))}
         </nav>
 

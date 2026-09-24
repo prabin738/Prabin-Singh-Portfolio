@@ -113,12 +113,13 @@ export const projects: Project[] = [
   },
   {
     slug: "max-media-admin-dashboard",
-    title: "Max Media admin dashboard",
-    summary: "Web dashboard for Max Media's field survey operations: live filters, charts and Excel export.",
+    title: "Max Media Survey Console",
+    summary:
+      "An admin web console that turns raw CAPI field-survey submissions into live dashboards and a client-exact Excel deliverable for a Nepal-based market research operation.",
     status: "client-work",
     type: "web",
     categories: ["frontend", "website"],
-    stack: ["React", "Tailwind CSS", "Recharts", "MongoDB"],
+    stack: ["React", "Vite", "Tailwind CSS", "React Router", "Recharts", "SheetJS (xlsx)"],
     cover: {
       src: "/img/projects/max-media-admin-dashboard/cover",
       alt: "Max Media admin dashboard overview with survey totals, a weekly trend chart and region distribution",
