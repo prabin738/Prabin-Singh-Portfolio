@@ -11,6 +11,10 @@ const button = cva(
         primary: "bg-primary text-white hover:bg-primary-hover",
         secondary: "border border-line-strong text-fg hover:bg-raised",
         ghost: "text-fg hover:bg-raised",
+        // Crimson-tinted at rest so it stands out on dark tiles without competing with
+        // the solid primary CTA; fills to solid crimson and lifts slightly on hover.
+        tinted:
+          "border border-primary/45 bg-primary/12 text-primary-fg transition-[color,background-color,border-color,box-shadow,translate] duration-200 ease-out hover:-translate-y-0.5 hover:border-primary hover:bg-primary hover:text-white hover:shadow-lg hover:shadow-primary/30 active:translate-y-0 active:shadow-none motion-reduce:transition-colors motion-reduce:hover:translate-y-0 [&_svg]:transition-transform [&_svg]:duration-200 hover:[&_svg]:scale-110 motion-reduce:hover:[&_svg]:scale-100",
       },
     },
     defaultVariants: { variant: "primary" },

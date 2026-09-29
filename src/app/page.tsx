@@ -1,10 +1,12 @@
 import { site, SITE_URL } from "@content/data/site";
 import { education } from "@content/data/about";
 import { experience } from "@content/data/experience";
+import { services } from "@content/data/services";
 import { JsonLd } from "@/lib/json-ld";
 import { absoluteUrl } from "@/lib/seo";
 import { HeroSection } from "@/components/hero/hero-section";
 import { ProjectsSection } from "@/components/sections/projects-section";
+import { ServicesSection } from "@/components/sections/services-section";
 import { StackSection } from "@/components/sections/stack-section";
 import { ExperienceSection } from "@/components/sections/experience-section";
 import { AboutSection } from "@/components/sections/about-section";
@@ -28,6 +30,10 @@ export default function Home() {
         ...(currentRole ? { worksFor: { "@type": "Organization", name: currentRole.company } } : {}),
         alumniOf: { "@type": "CollegeOrUniversity", name: education.institution },
         sameAs: [site.links.github, site.links.linkedin],
+        makesOffer: services.map((service) => ({
+          "@type": "Offer",
+          itemOffered: { "@type": "Service", name: service.title, description: service.description },
+        })),
       },
       {
         "@type": "WebSite",
@@ -46,6 +52,8 @@ export default function Home() {
       <HeroSection />
 
       <ProjectsSection />
+
+      <ServicesSection />
 
       <StackSection />
 
