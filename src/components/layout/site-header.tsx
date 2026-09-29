@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 
 const NAV_ITEMS = [
   { href: "/#projects", label: "Featured works" },
+  { href: "/#services", label: "Services" },
   { href: "/#stack", label: "Skills and Stacks" },
   { href: "/#experience", label: "Experience" },
   // Blog is left out of the nav until the launch rule in docs/04-content-copy.md (at least 2 posts) is met.
@@ -25,7 +26,7 @@ export function SiteHeader() {
           {site.name}
         </Link>
 
-        <nav aria-label="Primary" className="hidden lg:flex lg:items-center lg:gap-8">
+        <nav aria-label="Primary" className="hidden lg:flex lg:items-center lg:gap-5 xl:gap-8">
           {NAV_ITEMS.map((item) => (
             <NavLink
               key={item.href}

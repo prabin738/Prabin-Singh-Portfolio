@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { Briefcase, Clock, FileSignature, type LucideIcon } from "lucide-react";
 import { site } from "@content/data/site";
 import { engagementTypes } from "@content/data/contact";
+import { whatsappHref } from "@/lib/whatsapp";
 import { Section } from "@/components/layout/section";
 import { BentoTile } from "@/components/bento/bento-tile";
 import { Button } from "@/components/ui/button";
@@ -13,8 +14,7 @@ const ENGAGEMENT_ICON: Record<string, LucideIcon> = {
   Contract: FileSignature,
 };
 
-const WHATSAPP_MESSAGE = "Hi Prabin, I found your portfolio and wanted to talk about a project.";
-const WHATSAPP_HREF = `${site.links.whatsapp}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
+const WHATSAPP_HREF = whatsappHref("Hi Prabin, I found your portfolio and wanted to talk about a project.");
 
 const CONTACT_LINKS: { label: string; href: string; icon: ReactNode }[] = [
   { label: "LinkedIn", href: site.links.linkedin, icon: <LinkedinIcon size={18} /> },
