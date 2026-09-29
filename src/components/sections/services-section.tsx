@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Check, Monitor, PenTool, Server, Smartphone, type LucideIcon } from "lucide-react";
 import { services, type Service } from "@content/data/services";
 import { whatsappHref } from "@/lib/whatsapp";
+import { trackClick } from "@/lib/analytics";
 import { Section } from "@/components/layout/section";
 import { BentoTile } from "@/components/bento/bento-tile";
 import { Button } from "@/components/ui/button";
@@ -60,6 +61,7 @@ export function ServicesSection() {
                     href={whatsappHref(service.whatsappMessage)}
                     variant="tinted"
                     aria-label={`Let's talk about ${service.title.toLowerCase()} on WhatsApp`}
+                    {...trackClick("whatsapp_click", `services-${service.id}`)}
                   >
                     <BrandIcon slug="whatsapp" size={18} />
                     Let&apos;s talk
@@ -83,7 +85,12 @@ export function ServicesSection() {
               Send me a short note about your idea on WhatsApp and I&apos;ll reply with next steps.
             </p>
           </div>
-          <Button href={WORK_WITH_ME_HREF} variant="primary" className="shrink-0">
+          <Button
+            href={WORK_WITH_ME_HREF}
+            variant="primary"
+            className="shrink-0"
+            {...trackClick("whatsapp_click", "services-banner")}
+          >
             <BrandIcon slug="whatsapp" size={18} />
             Work with me
           </Button>

@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Bricolage_Grotesque } from "next/font/google";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { AnalyticsClickTracker } from "@/components/layout/analytics-click-tracker";
 import "./globals.css";
 import { site, SITE_URL } from "@content/data/site";
 import { isProductionDeploy } from "@/lib/seo";
@@ -82,7 +83,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </ThemeProvider>
       </body>
       {isProductionDeploy && process.env.NEXT_PUBLIC_GA_ID && (
-        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+        <>
+          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+          <AnalyticsClickTracker />
+        </>
       )}
     </html>
   );

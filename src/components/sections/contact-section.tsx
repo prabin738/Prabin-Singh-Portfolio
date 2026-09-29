@@ -3,6 +3,7 @@ import { Briefcase, Clock, FileSignature, type LucideIcon } from "lucide-react";
 import { site } from "@content/data/site";
 import { engagementTypes } from "@content/data/contact";
 import { whatsappHref } from "@/lib/whatsapp";
+import { trackClick } from "@/lib/analytics";
 import { Section } from "@/components/layout/section";
 import { BentoTile } from "@/components/bento/bento-tile";
 import { Button } from "@/components/ui/button";
@@ -54,7 +55,7 @@ export function ContactSection() {
           </div>
 
           <div className="flex flex-col items-start gap-4 sm:items-end">
-            <Button href={WHATSAPP_HREF} variant="primary">
+            <Button href={WHATSAPP_HREF} variant="primary" {...trackClick("whatsapp_click", "contact")}>
               <BrandIcon slug="whatsapp" size={18} />
               Let&apos;s talk
             </Button>
